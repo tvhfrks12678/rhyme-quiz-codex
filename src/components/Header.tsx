@@ -1,7 +1,7 @@
 import { Link } from '@tanstack/react-router'
 
 import { useState } from 'react'
-import { Home, Menu, X } from 'lucide-react'
+import { Home, Mic2, Menu, X } from 'lucide-react'
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false)
@@ -17,12 +17,13 @@ export default function Header() {
           <Menu size={24} />
         </button>
         <h1 className="ml-4 text-xl font-semibold">
-          <Link to="/">
+          <Link to="/" className="flex items-center gap-3">
             <img
               src="/tanstack-word-logo-white.svg"
               alt="TanStack Logo"
               className="h-10"
             />
+            <span className="hidden md:inline text-sm text-cyan-300">Rhyme Quiz</span>
           </Link>
         </h1>
       </header>
@@ -57,9 +58,18 @@ export default function Header() {
             <span className="font-medium">Home</span>
           </Link>
 
-          {/* Demo Links Start */}
-
-          {/* Demo Links End */}
+          <Link
+            to="/quiz"
+            onClick={() => setIsOpen(false)}
+            className="flex items-center gap-3 p-3 rounded-lg hover:bg-gray-800 transition-colors mb-2"
+            activeProps={{
+              className:
+                'flex items-center gap-3 p-3 rounded-lg bg-cyan-600 hover:bg-cyan-700 transition-colors mb-2',
+            }}
+          >
+            <Mic2 size={20} />
+            <span className="font-medium">ラップ韻クイズ</span>
+          </Link>
         </nav>
       </aside>
     </>

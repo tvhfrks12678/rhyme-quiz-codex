@@ -9,11 +9,12 @@
     "dev": "vite dev --port 3000",
     "build": "vite build",
     "preview": "vite preview",
-    "test": "vitest run",
+    "test": "vitest run --config vitest.config.ts",
     "format": "biome format",
     "lint": "biome lint",
     "check": "biome check",
-    "deploy": "pnpm run build && wrangler deploy"
+    "deploy": "pnpm run build && wrangler deploy",
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@cloudflare/vite-plugin": "^1.13.8",
