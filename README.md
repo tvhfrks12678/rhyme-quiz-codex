@@ -1,4 +1,11 @@
-Welcome to your new TanStack Start app! 
+# 概要
+<img width="300" alt="スクリーンショット 2026-02-21 15 46 58" src="https://github.com/user-attachments/assets/6721f11d-f58c-4b12-a726-a044ce0f8c6f" />
+
+- 音楽のラップの韻のクイズサイト
+- AIのCodexでコードを実装中
+
+## URL
+- [韻クイズ](https://rhyme-quiz-codex.tvhfrks12678.workers.dev/quiz)
 
 ## `src/features` の構成（ヘキサゴナルアーキテクチャ風）
 
@@ -37,6 +44,8 @@ Welcome to your new TanStack Start app!
 
 このように、`domain`（ルール）を中心に、`application`（ユースケース）が `infra`（データ）や `api-client` / ルート層（入出力）をつなぐ形で、変更に強い構造を目指しています。
 
+
+Welcome to your new TanStack Start app! 
 # Getting Started
 
 To run this application:
