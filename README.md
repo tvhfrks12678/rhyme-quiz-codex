@@ -1,5 +1,42 @@
 Welcome to your new TanStack Start app! 
 
+## `src/features` の構成（ヘキサゴナルアーキテクチャ風）
+
+このプロジェクトのクイズ機能は、`src/features/quiz` 配下を中心に、責務を分けた構成になっています。
+
+### ディレクトリごとの役割
+
+- `src/features/quiz/domain`
+  - ビジネスルールの中核。
+  - 例: `judge.ts` で「選択肢の正誤判定」や「スコア計算」の純粋関数を提供。
+- `src/features/quiz/application`
+  - ユースケース層。
+  - 例: `quizService.ts` で「次の問題を作る」「解答を採点する」を実装し、`domain` と `infra` を組み合わせる。
+- `src/features/quiz/infra`
+  - データ提供層（インフラ層）。
+  - 例: `quizData.ts` に内部用の問題データ（正解フラグや母音情報など）を保持。
+- `src/features/quiz/contracts`
+  - 層の境界で使う型定義。
+  - 例: クライアントへ返す公開問題型、解答リクエスト型、結果型を定義。
+- `src/features/quiz/api-client`
+  - フロントエンド側の API 呼び出しアダプタ。
+  - 例: `/api/quiz/next`, `/api/quiz/submit` への `fetch` を隠蔽。
+- `src/features/quiz/store`
+  - フロントエンドのセッション状態管理。
+  - 例: 回答回数・正解数の保持、更新、リセット。
+
+### 処理の流れ（概要）
+
+1. 画面（`src/routes/quiz.tsx`）が `api-client` を使って「次の問題取得」APIを呼ぶ。
+2. API ルート（`src/routes/api/quiz/next.ts`）が `application` 層の `getNextQuestion` を実行。
+3. `application` 層が `infra` の問題データを参照し、`contracts` の公開型に変換して返す。
+4. ユーザーが回答し、画面から `api-client` 経由で「解答送信」APIを呼ぶ。
+5. API ルート（`src/routes/api/quiz/submit.ts`）が `application` 層の `submitAnswer` を実行。
+6. `submitAnswer` は `infra` の正解データと `domain` の判定ロジック（`judgeAnswer`）を使って結果を作る。
+7. 返却結果を画面に表示し、同時に `store` でセッションスコアを更新する。
+
+このように、`domain`（ルール）を中心に、`application`（ユースケース）が `infra`（データ）や `api-client` / ルート層（入出力）をつなぐ形で、変更に強い構造を目指しています。
+
 # Getting Started
 
 To run this application:
