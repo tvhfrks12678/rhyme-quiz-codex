@@ -4,6 +4,11 @@
 - 音楽のラップの韻のクイズサイト
 - AIのCodexでコードを実装中
 
+## 技術スタック
+- 言語: TypeScript
+- フレームワーク: TanStack Start（React）
+- インフラ: Cloudflare
+
 ## URL
 - [韻クイズ](https://rhyme-quiz-codex.tvhfrks12678.workers.dev/quiz)
 
